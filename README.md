@@ -131,19 +131,88 @@ backend/
 
 ## 🧪 Testes
 
-Para implementar testes no projeto, recomenda-se adicionar Jest e Supertest:
+O projeto utiliza Jest e Supertest para testes automatizados da API:
 
 ```bash
 npm install --save-dev jest supertest
 ```
 
-E adicionar o script de teste no package.json:
+Configure o script de teste no package.json:
 
 ```json
 "scripts": {
-  "test": "jest"
+  "test": "jest --verbose"
 }
 ```
+
+### Configuração de Testes
+
+Crie um arquivo `jest.config.js` na raiz do projeto:
+
+```javascript
+module.exports = {
+  testEnvironment: 'node',
+  reporters: [
+    'default',
+    ['./CustomJsonReporter.js', { outputPath: 'test-results.json' }]
+  ]
+};
+```
+
+### Reporter Personalizado
+
+Para ter relatórios detalhados dos testes, crie um arquivo `CustomJsonReporter.js`:
+
+```javascript
+// CustomJsonReporter.js
+const fs = require('fs');
+const path = require('path');
+
+class CustomJsonReporter {
+  constructor(globalConfig, options) {
+    this._globalConfig = globalConfig;
+    this._options = options || {};
+  }
+
+  onRunComplete(contexts, results) {
+    const outputPath = this._options.outputPath || 'test-results.json';
+    // Escreve o arquivo com indentação de 2 espaços para formatação legível
+    fs.writeFileSync(
+      path.resolve(outputPath),
+      JSON.stringify(results, null, 2),
+      'utf8'
+    );
+    console.log(`\nArquivo de resultados gerado em: ${outputPath}`);
+  }
+}
+
+module.exports = CustomJsonReporter;
+```
+
+### Exemplo de Teste
+
+Crie um arquivo `backend.test.js` para testar os endpoints:
+
+```javascript
+const request = require('supertest');
+const app = require('./server'); // Ajuste o caminho conforme a estrutura do seu projeto
+
+describe('API /api/notes', () => {
+  it('deve retornar um array de notas', async () => {
+    const res = await request(app).get('/api/notes');
+    expect(res.statusCode).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+  });
+});
+```
+
+Para executar os testes, use:
+
+```bash
+npm test
+```
+
+Os resultados serão exibidos no console e também salvos no arquivo `test-results.json` com formatação adequada para análise posterior.
 
 ## 📋 Requisitos do Projeto
 
