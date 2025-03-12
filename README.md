@@ -5,6 +5,7 @@
 ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 ![Dotenv](https://img.shields.io/badge/Dotenv-ECD53F?style=for-the-badge&logo=dotenv&logoColor=black)
 ![CORS](https://img.shields.io/badge/CORS-FF6C37?style=for-the-badge&logo=cors&logoColor=white)
+![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
 
 ## 📋 Descrição
 
@@ -73,6 +74,15 @@ http://localhost:3001
 ## 📊 Estrutura do Banco de Dados
 
 ```sql
+-- Cria o banco de dados, se não existir
+CREATE DATABASE IF NOT EXISTS todo_app 
+  CHARACTER SET utf8mb4 
+  COLLATE utf8mb4_unicode_ci;
+
+-- Seleciona o banco de dados criado
+USE todo_app;
+
+-- Cria a tabela "notes" para armazenar as tarefas/itens da lista
 CREATE TABLE IF NOT EXISTS notes (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
@@ -82,6 +92,11 @@ CREATE TABLE IF NOT EXISTS notes (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+-- Dados de exemplo (opcional)
+INSERT INTO notes (title, content, color, is_favorite) VALUES
+('Tarefa Exemplo 1', 'Conteúdo da tarefa exemplo 1', '#E2FFFA', false),
+('Tarefa Exemplo 2', 'Conteúdo da tarefa exemplo 2', '#FFE2C3', true);
 ```
 
 ## 🔌 Endpoints da API

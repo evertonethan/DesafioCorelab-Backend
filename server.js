@@ -111,13 +111,3 @@ app.listen(PORT, () => {
 
 
 
-// Exporta o app para testes
-module.exports = app;
-
-// Se quiser rodar o servidor isoladamente:
-if (require.main === module) {
-    const PORT = process.env.PORT || 3001;
-    app.listen(PORT, () => {
-        console.log(`Servidor rodando na porta ${PORT}`);
-    });
-}
