@@ -11,6 +11,10 @@
 
 Backend do desafio Corelab Challenge - Uma API RESTful desenvolvida em Node.js com Express e MySQL para gerenciar uma aplicação de lista de tarefas. Esta API permite a criação, leitura, atualização e exclusão de notas, além de suportar a funcionalidade de favoritar itens e definir cores para cada nota.
 
+## Vídeo Demostração
+
+https://www.awesomescreenshot.com/video/37555107?key=224a84eed7f6888f236b2e68cb7cf9c8
+
 ## 🚀 Recursos
 
 - **API RESTful completa** para gerenciamento de notas
